@@ -17,6 +17,7 @@ var aggrFuncs = map[string]bool{
 	"bottomk":      true,
 	"topk":         true,
 	"quantile":     true,
+	"group":        true,
 
 	// MetricsQL extension funcs
 	"median":         true,
@@ -35,6 +36,8 @@ var aggrFuncs = map[string]bool{
 	"bottomk_median": true,
 	"any":            true,
 	"outliersk":      true,
+	"mode":           true,
+	"zscore":         true,
 }
 
 func isAggrFunc(s string) bool {

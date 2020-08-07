@@ -138,6 +138,10 @@ func TestParseSuccess(t *testing.T) {
 	another(`+Inf`, `+Inf`)
 	another(`-Inf`, `-Inf`)
 	another(`-inF`, `-Inf`)
+	another(`0x12`, `18`)
+	another(`0b1011`, `11`)
+	another(`073`, `59`)
+	another(`-0o12`, `-10`)
 
 	// binaryOpExpr
 	another(`nan == nan`, `NaN`)
@@ -176,7 +180,8 @@ func TestParseSuccess(t *testing.T) {
 	another(`1 + -2 - 3`, `-4`)
 	another(`1 / 0 + 2`, `+Inf`)
 	another(`2 + -1 / 0`, `-Inf`)
-	another(`-1 ^ 0.5`, `NaN`)
+	another(`(-1) ^ 0.5`, `NaN`)
+	another(`-1 ^ 0.5`, `-1`)
 	another(`512.5 - (1 + 3) * (2 ^ 2) ^ 3`, `256.5`)
 	another(`1 == bool 1 != bool 24 < bool 4 > bool -1`, `1`)
 	another(`1 == bOOl 1 != BOOL 24 < Bool 4 > booL -1`, `1`)

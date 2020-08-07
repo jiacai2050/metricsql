@@ -51,6 +51,7 @@ var transformFuncs = map[string]bool{
 	"":                   true, // empty func is a synonim to union
 	"keep_last_value":    true,
 	"keep_next_value":    true,
+	"interpolate":        true,
 	"start":              true,
 	"end":                true,
 	"step":               true,
@@ -76,6 +77,7 @@ var transformFuncs = map[string]bool{
 	"asin":               true,
 	"acos":               true,
 	"prometheus_buckets": true,
+	"buckets_limit":      true,
 	"histogram_share":    true,
 	"sort_by_label":      true,
 	"sort_by_label_desc": true,
