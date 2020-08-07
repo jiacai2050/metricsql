@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"unicode"
 )
 
 type lexer struct {
@@ -203,12 +204,20 @@ func scanPositiveNumber(s string) (string, error) {
 
 func scanIdent(s string) string {
 	i := 0
-	for i < len(s) {
-		if isIdentChar(s[i]) {
+	rs := []rune(s)
+	for i < len(rs) {
+		r := rs[i]
+		if unicode.Is(unicode.Han, r) {
 			i++
 			continue
 		}
-		if s[i] != '\\' {
+
+		b := byte(r)
+		if isIdentChar(b) {
+			i++
+			continue
+		}
+		if b != '\\' {
 			break
 		}
 
@@ -222,7 +231,7 @@ func scanIdent(s string) string {
 	if i == 0 {
 		panic("BUG: scanIdent couldn't find a single ident char; make sure isIdentPrefix called before scanIdent")
 	}
-	return s[:i]
+	return string(rs[:i])
 }
 
 func unescapeIdent(s string) string {
@@ -472,7 +481,7 @@ func isFirstIdentChar(ch byte) bool {
 	if ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' {
 		return true
 	}
-	return ch == '_' || ch == ':'
+	return ch == '_' || ch == ':' || ch == '@'
 }
 
 func isIdentChar(ch byte) bool {
