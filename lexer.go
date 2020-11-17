@@ -500,7 +500,7 @@ func isIdentPrefix(s string) bool {
 		// Assume this is an escape char for the next char.
 		return true
 	}
-	return isFirstIdentChar(s[0])
+	return isFirstIdentChar(s[0]) || isValidUnicode(s)
 }
 
 func isFirstIdentChar(ch byte) bool {

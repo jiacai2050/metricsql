@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"unicode"
 )
 
 const (
@@ -64,5 +65,11 @@ func wrapType(v interface{}, typo string) ([]byte, error) {
 	buf.WriteByte('}')
 
 	return buf.Bytes(), nil
+}
 
+func isValidUnicode(s string) bool {
+	if len(s) == 0 {
+		return false
+	}
+	return unicode.Is(unicode.Han, []rune(s)[0])
 }
